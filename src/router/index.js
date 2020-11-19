@@ -13,7 +13,7 @@ const routes = [
     component: Home,
   },
   {
-    path: '/contract',
+    path: '/contract/:contractId/:productId',
     component: Contract,
   },
   {

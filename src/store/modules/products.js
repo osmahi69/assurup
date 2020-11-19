@@ -5,7 +5,6 @@
 const state = {
   list: [],
 };
-
 // getters
 const getters = {
   get: (state) => state.list,
