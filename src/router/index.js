@@ -2,13 +2,23 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '@/views/Home.vue';
+import Contract from '@/views/Contract.vue';
+import Products from '@/views/Products.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '',
+    path: '/',
     component: Home,
+  },
+  {
+    path: '/contract',
+    component: Contract,
+  },
+  {
+    path: '/products',
+    component: Products,
   },
 ];
 
