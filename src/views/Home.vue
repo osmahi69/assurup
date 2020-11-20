@@ -41,29 +41,24 @@
 </template>
 
 <script>
-import contracts from '../assets/data/contracts.json';
-import products from '../assets/data/products.json';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Home',
   data() {
     return {
-      theContracts: contracts,
-      theProducts: products,
       search: '',
     };
   },
   computed: {
+    ...mapState((['contracts', 'products'])),
     selectedProduct() {
-      const pId = contracts.map((contract) => contract.productId);
-      const selectedProduct = this.theProducts.find((p, index) => p.id === pId[index]);
-      console.log(selectedProduct);
+      const pId = this.contracts.list.map((contract) => contract.productId);
+      const selectedProduct = this.products.list.find((p, index) => p.id === pId[index]);
       return selectedProduct;
     },
-  },
-  methods: {
-    filter(value, search) {
-      return value != null && search != null && typeof value === 'string';
+    theContracts() {
+      return this.contracts.list;
     },
   },
 };
