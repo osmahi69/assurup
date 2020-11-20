@@ -1,14 +1,15 @@
 <template>
-     <div id="app">
-  <v-app >
-      <v-app-bar>
-        <template >
-
+  <div id="app">
+  <v-app class="app">
+      <v-app-bar
+        color="#F0F8FF"
+      >
+        <template>
         </template>
         <v-avatar @click="goToHome()" class="avatar">
             <v-img :src="require('./assurup.jpg')" class="grey lighten-2" width="0" />
         </v-avatar>
-           <v-toolbar-title color="blue" class="ml-3">Assurup</v-toolbar-title>
+           <v-toolbar-title color="blue" class="ml-3 headerTitle">Assurup</v-toolbar-title>
         <template v-slot:extension>
           <v-tabs align-with-title>
             <v-tab @click="goToHome()">Home</v-tab>
@@ -28,8 +29,6 @@ import products from '@/assets/data/products.json';
 
 export default {
   name: 'App',
-  components: {
-  },
   methods: {
     goToHome() {
       this.$router.push('/');
@@ -47,5 +46,8 @@ export default {
 <style lang="scss" scoped>
 .avatar {
   cursor: pointer
+}
+.headerTitle {
+  color: blue;
 }
 </style>

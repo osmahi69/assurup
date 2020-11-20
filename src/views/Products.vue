@@ -1,19 +1,20 @@
 <template>
-<v-card outlined elevation="2">
+<v-card outlined elevation="2" class="card" :single-line="true">
   <v-card-title class="title"> Products</v-card-title>
   <div v-for="(product, index) in theProducts" :key="product.id">
       <div class="displayFlex">
         <th class="metaData"> Description of product {{product.id}}:</th>
-        <v-text-field
-        class="textField"
-        label="Description"
-        :value="product.description"
-        @change="updateDescription($event, product)"
-      ></v-text-field>
+      <v-textarea
+            outlined
+            class="textArea"
+            :value="product.description"
+            @change="updateDescription($event, product)"
+          ></v-textarea>
       </div>
       <div class="displayFlex">
-        <th class="name"> Name of product: {{product.id}}</th>
+        <th class="name"> Name of product  {{product.id}}:</th>
         <v-text-field
+        outlined
         class="textFieldName"
         label="Name"
         :value="product.name"
@@ -49,22 +50,17 @@ export default {
       return this.products.list;
     },
     PriceOfProduct() {
-      console.log('this.contracts.list : ', this.contracts.list.toString());
       const listOfTotalPrice = this.products.list.map((p) => {
         let totalPrice = 0;
-        console.log('this is P :', p);
         this.contracts.list.map((c) => {
-          console.log('this is c :', c);
           if (p.id === c.productId) {
             totalPrice += c.price;
-            console.log('&', totalPrice);
             return totalPrice;
           }
           return null;
         });
         return totalPrice;
       });
-      console.log(listOfTotalPrice);
       return listOfTotalPrice;
     },
   },
@@ -73,6 +69,13 @@ export default {
 <style lang="scss" scoped>
 .displayFlex {
   display: flex;
+}
+.textArea{
+  margin-top: 10px;
+  margin-right: 5px
+}
+.card {
+  height: 1600px;
 }
 .title {
   font-weight: 900;
