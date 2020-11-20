@@ -19,7 +19,8 @@
       ></v-text-field>
         </div>
         <div class="displayFlex">
-        <th class="metaData"> Total price of product {{product.id}}:</th>
+        <th class="metaData"> Total price of product {{product.id}}: </th>
+        <div> {{PriceOfProduct}} </div>
       </div>
       <v-divider/>
       </div>
@@ -36,9 +37,24 @@ export default {
     };
   },
   computed: {
-    ...mapState((['products'])),
+    ...mapState((['products', 'contracts'])),
     theProducts() {
       return this.products.list;
+    },
+    PriceOfProduct() {
+      let a = 0;
+      const selectedProduct = this.products.list.map((p) => {
+        this.contracts.list.map((c, index) => {
+          if (p.id === c.productId && c[index] === c[index + 1]) {
+            a += c[index] + c[index + 1];
+            console.log(a);
+            return a;
+          }
+          return null;
+        });
+        return null;
+      });
+      return selectedProduct;
     },
   },
 };
