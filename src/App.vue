@@ -5,15 +5,14 @@
         <template >
 
         </template>
-        <v-avatar @click="goHome()" class="avatar">
+        <v-avatar @click="goToHome()" class="avatar">
             <v-img :src="require('./assurup.jpg')" class="grey lighten-2" width="0" />
         </v-avatar>
            <v-toolbar-title color="blue" class="ml-3">Assurup</v-toolbar-title>
         <template v-slot:extension>
           <v-tabs align-with-title>
-            <v-tab>Home</v-tab>
-          <router-link to="/products"><v-tab>Products</v-tab></router-link>
-            <v-tab>Contract</v-tab>
+            <v-tab @click="goToHome()">Home</v-tab>
+          <v-tab @click="goToProducts()">Products</v-tab>
           </v-tabs>
         </template>
       </v-app-bar>
@@ -32,8 +31,11 @@ export default {
   components: {
   },
   methods: {
-    goHome() {
+    goToHome() {
       this.$router.push('/');
+    },
+    goToProducts() {
+      this.$router.push('/products');
     },
   },
   mounted() {

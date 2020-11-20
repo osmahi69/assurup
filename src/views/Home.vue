@@ -1,6 +1,11 @@
 <template>
   <div>
+    <input type>
+    <div class="search-wrapper">
+    <input type="text" v-model="search" placeholder="Search title.."/>
+  </div>
     <v-card>
+      <v-card-title class="title"> Contracts </v-card-title>
       <v-container>
         <v-simple-table fixed-header>
           <template v-slot:default>
@@ -44,3 +49,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.title {
+  font-weight: 900;
+  color: blue;
+}
+</style>
