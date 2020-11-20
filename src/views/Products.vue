@@ -75,7 +75,7 @@ export default {
   margin-right: 5px
 }
 .card {
-  height: 1600px;
+  height: 1620px;
 }
 .title {
   font-weight: 900;
