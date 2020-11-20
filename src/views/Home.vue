@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-card>
+    <v-card elevation="2">
       <v-card-title class="title"> Contracts </v-card-title>
       <v-container>
           <v-text-field
