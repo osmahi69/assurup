@@ -3,21 +3,23 @@
   <v-card-title class="title"> Products</v-card-title>
   <div v-for="product in theProducts" :key="product.id">
       <div class="displayFlex">
-        <th class="metaData"> Description {{product.id}}:</th>
+        <th class="metaData"> Description of product {{product.id}}:</th>
         <v-text-field
         class="textField"
         label="Description"
-        :rules="rules"
+        :value="product.description"
       ></v-text-field>
       </div>
       <div class="displayFlex">
-        <th class="name"> Name: {{product.id}}</th>
+        <th class="name"> Name of product: {{product.id}}</th>
         <v-text-field
         class="textFieldName"
         label="Name"
-        :rules="rules"
+        :value="product.name"
       ></v-text-field>
-        <input v-model="message" />
+        </div>
+        <div class="displayFlex">
+        <th class="metaData"> Total price of product {{product.id}}:</th>
       </div>
       <v-divider/>
       </div>

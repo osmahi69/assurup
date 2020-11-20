@@ -20,9 +20,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="contract in theContracts" :key="contract.id">
+              <tr v-for="(contract, index) in theContracts" :key="contract.id">
                 <td>{{ contract.productId }}</td>
-                <td>{{ selectedProduct.name}}</td>
+                <td>{{ selectedProduct[index]}}</td>
                 <td>{{ contract.effectiveDate }}</td>
                 <td>{{ contract.status }}</td>
                 <td>
@@ -53,8 +53,17 @@ export default {
   computed: {
     ...mapState((['contracts', 'products'])),
     selectedProduct() {
-      const pId = this.contracts.list.map((contract) => contract.productId);
-      const selectedProduct = this.products.list.find((p, index) => p.id === pId[index]);
+      let name = {};
+      const selectedProduct = this.contracts.list.map((c) => {
+        this.products.list.map((p) => {
+          if (p.id === c.productId) {
+            name = p.name;
+            return name;
+          }
+          return null;
+        });
+        return name;
+      });
       return selectedProduct;
     },
     theContracts() {
