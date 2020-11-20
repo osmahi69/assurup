@@ -23,6 +23,10 @@ const mutations = {
     const [key] = Object.keys(object);
     state[key] = object[key];
   },
+  UPDATE_PRODUCT(state, object) {
+    const index = state.list.findIndex((p) => p.id === object.id);
+    state.list[index] = object;
+  },
 };
 
 export default {

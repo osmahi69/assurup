@@ -1,13 +1,14 @@
 <template>
 <v-card outlined elevation="2">
   <v-card-title class="title"> Products</v-card-title>
-  <div v-for="product in theProducts" :key="product.id">
+  <div v-for="(product, index) in theProducts" :key="product.id">
       <div class="displayFlex">
         <th class="metaData"> Description of product {{product.id}}:</th>
         <v-text-field
         class="textField"
         label="Description"
         :value="product.description"
+        @change="updateDescription($event, product)"
       ></v-text-field>
       </div>
       <div class="displayFlex">
@@ -16,11 +17,12 @@
         class="textFieldName"
         label="Name"
         :value="product.name"
+        @change="updateName($event, product)"
       ></v-text-field>
         </div>
         <div class="displayFlex">
         <th class="metaData"> Total price of product {{product.id}}: </th>
-        <div> {{PriceOfProduct}} </div>
+        <span class="price"> {{ PriceOfProduct[index] }}</span>
       </div>
       <v-divider/>
       </div>
@@ -31,10 +33,15 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'Products',
-  data() {
-    return {
-
-    };
+  methods: {
+    updateDescription(newValue, product) {
+      const updatedProduct = { ...product, description: newValue };
+      this.$store.commit('products/UPDATE_PRODUCT', updatedProduct);
+    },
+    updateName(newValue, product) {
+      const updatedProduct = { ...product, name: newValue };
+      this.$store.commit('products/UPDATE_PRODUCT', updatedProduct);
+    },
   },
   computed: {
     ...mapState((['products', 'contracts'])),
@@ -42,19 +49,23 @@ export default {
       return this.products.list;
     },
     PriceOfProduct() {
-      let a = 0;
-      const selectedProduct = this.products.list.map((p) => {
-        this.contracts.list.map((c, index) => {
-          if (p.id === c.productId && c[index] === c[index + 1]) {
-            a += c[index] + c[index + 1];
-            console.log(a);
-            return a;
+      console.log('this.contracts.list : ', this.contracts.list.toString());
+      const listOfTotalPrice = this.products.list.map((p) => {
+        let totalPrice = 0;
+        console.log('this is P :', p);
+        this.contracts.list.map((c) => {
+          console.log('this is c :', c);
+          if (p.id === c.productId) {
+            totalPrice += c.price;
+            console.log('&', totalPrice);
+            return totalPrice;
           }
           return null;
         });
-        return null;
+        return totalPrice;
       });
-      return selectedProduct;
+      console.log(listOfTotalPrice);
+      return listOfTotalPrice;
     },
   },
 };
@@ -72,6 +83,9 @@ export default {
   margin-top: 24px;
   color: black;
   padding: 24px;
+}
+.price {
+  margin-top: 48px;
 }
 .name {
   font-weight: 700;
